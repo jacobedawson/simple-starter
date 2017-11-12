@@ -14,6 +14,7 @@ const cssnano = require('cssnano'); // minify css
 const autoprefixer = require('autoprefixer'); // autoprefix css
 
 //======Project Variables=====//
+
 //=====Style URLs
 const STYLE_SRC = './src/sass/**/**/*.scss';
 const STYLE_DEST = './dist/';
@@ -61,12 +62,15 @@ gulp.task('js', () => {
 // Browser reload
 gulp.task('browser-sync', () => {
     browserSync.init({
+        server: {
+            baseDir: './'
+        },
         open: false,
         injectChanges: true
     });
 });
 
-gulp.task('default', ['sass', 'js'], () => {
+gulp.task('default', ['sass', 'js', 'browser-sync'], () => {
     gulp.watch(STYLE_WATCH, ['sass']);
     gulp.watch(JS_WATCH, ['js', reload]);
 });
